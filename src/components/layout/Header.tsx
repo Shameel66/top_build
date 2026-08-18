@@ -55,7 +55,7 @@ export function Header() {
           )}
         >
           <Logo
-            theme="light"
+            theme={isFloating ? "dark" : "light"}
             className={cn(
               "transition-all duration-500",
               isFloating &&
@@ -72,10 +72,10 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "text-center font-sans leading-none font-medium tracking-normal text-white transition-all duration-300 hover:text-brand",
+                  "text-center font-sans leading-none font-medium tracking-normal transition-all duration-300 hover:text-brand",
                   isFloating
-                    ? "text-[0.95rem] xl:text-[1.05rem]"
-                    : "text-[clamp(1rem,1.455vw,1.375rem)]",
+                    ? "text-[0.95rem] text-ink xl:text-[1.05rem]"
+                    : "text-[clamp(1rem,1.455vw,1.375rem)] text-white",
                 )}
               >
                 {link.label}
@@ -102,7 +102,10 @@ export function Header() {
 
           <button
             type="button"
-            className="inline-flex size-10 cursor-pointer items-center justify-center text-white lg:hidden"
+            className={cn(
+              "inline-flex size-10 cursor-pointer items-center justify-center transition-colors duration-300 lg:hidden",
+              isFloating ? "text-ink" : "text-white",
+            )}
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -125,7 +128,12 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-full px-3 py-2.5 text-center font-sans text-[0.95rem] leading-none font-medium text-white transition-colors hover:bg-white/10 hover:text-brand"
+                className={cn(
+                  "rounded-full px-3 py-2.5 text-center font-sans text-[0.95rem] leading-none font-medium transition-colors hover:text-brand",
+                  isFloating
+                    ? "text-ink hover:bg-black/5"
+                    : "text-white hover:bg-white/10",
+                )}
                 onClick={() => setOpen(false)}
               >
                 {link.label}
